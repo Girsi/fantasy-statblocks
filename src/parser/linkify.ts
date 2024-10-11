@@ -80,20 +80,16 @@ class LinkifierClass extends Component {
     /** Attempt to convert a string into a link, while maintaining any whitespace. **/
     linkify(input: string, context: string = ""): string {
         let trimmed = input.trim();
-        const { file, alias } = this.getResolvedFile(trimmed, context);
-        if (file != null) {
-            return input.replace(
-                trimmed,
-                LinkStringifier.replaceWikiLink(
-                    `${file.basename}${alias ? "|" + alias : ""}`
-                )
-            );
-        }
-        return input;
+        return input.replace(
+            trimmed,
+            "<span style=\"font-style: var(--statblock-link-style)\">" + // make only the linkified spells of spelllists italic
+            LinkStringifier.replaceWikiLink(trimmed) // expect that the trimmed part is actually linkable
+            + "</span>"
+        );
     }
     linkifySpells(spells: string, context: string = ""): string {
         return spells.replace(
-            /(.+?)(\*?,|\*?$)/g,
+            /(.+?)(\*?,|\*?$|\(.*?\),?)/g, // also ignore stuff in round brackets
             (_, spell, splitter) => `${this.linkify(spell, context)}${splitter}`
         );
 
