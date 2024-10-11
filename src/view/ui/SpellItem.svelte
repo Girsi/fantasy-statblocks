@@ -36,7 +36,5 @@
     ul.spell-item.last {
         margin-bottom: revert;
     }
-    .spells {
-        font-style: italic;
-    }
+    /* removed that the whole spell line of a spell list is italic. e.g. stuff in brackets should not be italic  */
 </style>

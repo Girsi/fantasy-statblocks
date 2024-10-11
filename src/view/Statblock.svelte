@@ -332,9 +332,7 @@
         --active-link-style: var(--statblock-link-style);
     }
 
-    .statblock :global(a) {
-        font-style: var(--statblock-link-style);
-    }
+    /* removed global link italic-izing. Only spells from lists should automatically be italic */
     .container {
         display: flex;
         position: relative;
